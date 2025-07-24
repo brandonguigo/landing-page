@@ -3,10 +3,10 @@ import appIcon from "~/assets/appicon_transparent.png";
 import { Button } from "~/components/ui/button";
 
 const navLinks = [
-    { name: 'Features', href: '#features' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'FAQ', href: '#faq' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Features', href: '/#features' },
+    { name: 'Pricing', href: '/#pricing' },
+    { name: 'FAQ', href: '/#faq' },
+    { name: 'Contact', href: '/#contact' },
 ];
 
 const Navbar = () => {
@@ -21,15 +21,9 @@ const Navbar = () => {
                 {/* Navigation links */}
                 <div className="hidden md:flex items-center gap-8">
                     {navLinks.map(link => (
-                        <a key={link.name} href={link.href} className="text-base font-medium text-[#23263a] hover:text-[#7b61ff] transition" onClick={e => {
-                            const el = document.getElementById(link.href.replace('#', ''));
-                            if (el) {
-                                e.preventDefault();
-                                el.scrollIntoView({ behavior: 'smooth' });
-                            }
-                        }}>
+                        <Link key={link.name} to={link.href} prefetch="intent" className="text-base font-medium text-[#23263a] hover:text-[#7b61ff] transition">
                             {link.name}
-                        </a>
+                        </Link>
                     ))}
                 </div>
                 {/* Get Started button */}
