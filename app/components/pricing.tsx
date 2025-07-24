@@ -1,271 +1,121 @@
 import { CheckIcon } from 'lucide-react'
-import { Button } from './ui/button'
-import { Switch } from './ui/switch'
-import { Label } from './ui/label'
 import { useState } from 'react'
-import { cn } from '~/lib/utils'
-import { Badge } from './ui/badge'
 import { Link } from "@remix-run/react";
 
-const Pricing = () => {
-    const [checked, setChecked] = useState(false)
+const MONTHLY_PRICE = 3.99;
+const ANNUAL_PRICE = (MONTHLY_PRICE * 10).toFixed(2);
 
+const plans = [
+    {
+        name: 'Self-hosting',
+        price: 'Free',
+        sub: 'Forever',
+        description: 'Ideal for complete control and customization',
+        features: [
+            'Unlimited task lists',
+            'Unlimited tags',
+            'Unlimited members',
+            'Unlimited storage',
+            'Access to all the apps',
+            'Unlimited tasks, habits, notes...',
+            'Community support',
+        ],
+        button: 'Get started',
+        highlight: false,
+        free: true,
+        badge: undefined,
+    },
+    {
+        name: 'Cloud Free',
+        price: '$0.00',
+        sub: 'Forever',
+        description: 'Perfect for simplicity and ease of use',
+        features: [
+            '3 task lists',
+            '5 tags',
+            '2 members',
+            '1GB storage',
+            'Access to all the apps',
+            'Unlimited tasks, habits, notes...',
+            'Email & community support',
+        ],
+        button: 'Get started',
+        highlight: false,
+        free: true,
+        badge: undefined,
+    },
+]
+
+export default function Pricing() {
+    const [annual, setAnnual] = useState(false)
+    // Add the paid plan dynamically so it can use the toggle
+    const paidPlan = {
+        name: 'Cloud',
+        price: annual ? `$${ANNUAL_PRICE}` : `$${MONTHLY_PRICE}`,
+        sub: annual ? 'per year' : 'per month',
+        description: 'Perfect for simplicity and ease of use',
+        features: [
+            'Unlimited task lists',
+            'Unlimited tags',
+            'Unlimited members',
+            'Unlimited storage',
+            'Access to all the apps',
+            'Unlimited tasks, habits, notes...',
+            'Email & community support',
+        ],
+        button: 'Get started',
+        highlight: true,
+        free: false,
+        badge: 'SAVE 15%'
+    };
     return (
-        <section className='mx-auto mb-8 mt-48 px-5 dark:bg-[radial-gradient(ellipse_40%_50%_at_50%_-20%,hsla(var(--primary)_/_30%),#ffffff00)]'>
-            <div className='mx-auto mb-16 h-[1px] w-full max-w-2xl bg-gradient-to-r from-transparent via-primary to-transparent'></div>
-            <div className='mx-auto flex max-w-7xl flex-col gap-6 text-center'>
-                <div>
-                    <span className='rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-sm font-medium text-primary dark:bg-primary/25'>
-                        <span className='brightness-[1.7]'>
-                            Adaptable Pricing
-                        </span>
-                    </span>
-                    <h1 className='mt-4 scroll-m-20 font-inter text-4xl font-extrabold tracking-tight lg:text-5xl'>
-                        <span className='bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent'>
-                            Choose{' '}
-                        </span>
-                        <span className='bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent'>
-                            your{' '}
-                        </span>
-                        <span className='bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent'>
-                            plan
-                        </span>
-                    </h1>
+        <section className="w-full bg-gradient-to-b from-white via-[#f4f7fe] to-[#eaf1ff] py-20">
+            <div className="max-w-3xl mx-auto text-center mb-12">
+                <h2 className="text-4xl md:text-5xl font-extrabold mb-2 text-[#181c2a]">Adaptable Pricing</h2>
+                <div className="text-xl font-semibold mb-2 text-[#a259ff]">Choose your plan</div>
+                <p className="text-[#444] text-lg mb-6">Find your plan that fits your needs, whether you prefer self-hosting for complete control or our cloud solution for convenience.</p>
+                <div className="flex items-center justify-center gap-4 mb-2">
+                    <span className={`font-medium ${!annual ? 'text-[#a259ff]' : 'text-[#888]'}`}>Monthly</span>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" className="sr-only peer" checked={annual} onChange={() => setAnnual(!annual)} />
+                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[#a259ff] rounded-full peer dark:bg-gray-700 peer-checked:bg-[#a259ff] transition"></div>
+                        <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full shadow transition-transform ${annual ? 'translate-x-5' : ''}`}></div>
+                    </label>
+                    <span className={`font-medium ${annual ? 'text-[#a259ff]' : 'text-[#888]'}`}>Annually</span>
                 </div>
-                <p className='text-lg text-muted-foreground'>
-                    Find your plan that fits your needs, whether you prefer
-                    self-hosting for complete control or our cloud solution for
-                    convenience.
-                </p>
-                <div className='mt-20 flex items-center justify-center space-x-2'>
-                    <Label
-                        htmlFor='price-toggle'
-                        className={cn(checked && 'text-muted-foreground')}
+            </div>
+            <div className="flex flex-col md:flex-row gap-8 justify-center items-stretch w-full max-w-5xl mx-auto">
+                {[...plans, paidPlan].map((plan, idx) => (
+                    <div
+                        key={plan.name}
+                        className={`flex flex-col rounded-2xl shadow-xl border ${plan.highlight ? 'bg-gradient-to-br from-[#a259ff] to-[#3b82f6] text-white border-0 relative' : 'bg-white border-[#e5e7eb]'} w-full max-w-sm p-8 transition`}
                     >
-                        Monthly
-                    </Label>
-                    <Switch
-                        id='price-toggle'
-                        defaultChecked={false}
-                        checked={checked}
-                        onCheckedChange={() => setChecked(!checked)}
-                        className='data-[state=unchecked]:bg-primary'
-                        aria-label='toggle pricing'
-                    />
-                    <Label
-                        htmlFor='price-toggle'
-                        className={cn(!checked && 'text-muted-foreground')}
-                    >
-                        Annually
-                    </Label>
-                </div>
-                <div className='mt-10 flex flex-col items-center gap-6 lg:flex-row lg:items-stretch lg:justify-around lg:px-6'>
-                    <div className='flex flex-col gradient-border relative w-full max-w-sm flex-grow basis-0 rounded-md bg-gradient-to-bl from-primary/10 via-transparent to-transparent p-8 text-left before:bg-gradient-to-bl before:from-primary/30 before:to-primary/5 lg:max-w-none'>
-                        <div className='flex flex-col gap-3 text-left'>
-                            <p>Self-hosting</p>
-                            <div className='flex items-start gap-2'>
-                                <span className='text-2xl text-muted-foreground'>
-                                    $
-                                </span>
-                                <span className='bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-5xl font-medium text-transparent'>
-                                    Free Forever
-                                </span>
-                            </div>
-                            <p className='text-muted-foreground'>
-                                Ideal for complete control and customization
-                            </p>
-                        </div>
-                        <ul className='mt-8 flex flex-col gap-4'>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='mt-0.5 h-5 w-5 shrink-0 text-primary' />
-                                <span>Unlimited task lists</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='mt-0.5 h-5 w-5 shrink-0 text-primary' />
-                                <span>Unlimited tags</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='mt-0.5 h-5 w-5 shrink-0 text-primary' />
-                                <span>Unlimited members</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Unlimited storage</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Access to all the apps</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Unlimited tasks, habits, notes...</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Community support</span>
-                            </li>
+                        {plan.badge && (
+                            <span className="absolute top-5 right-5 bg-yellow-400 text-[#23263a] text-xs font-bold px-3 py-1 rounded-full">{plan.badge}</span>
+                        )}
+                        {/* Always display the plan name at the top */}
+                        <div className={`text-2xl font-bold mb-1 ${plan.highlight ? 'text-white' : 'text-[#181c2a]'}`}>{plan.name}</div>
+                        <div className="text-4xl font-extrabold mb-1" style={plan.highlight ? {color: 'white'} : {}}>{plan.price}</div>
+                        <div className={`mb-2 font-medium ${plan.highlight ? 'text-white/80' : 'text-[#444]'}`}>{plan.sub}</div>
+                        <div className={`mb-4 ${plan.highlight ? 'text-white/80' : 'text-[#444]'}`}>{plan.description}</div>
+                        <ul className="mb-8 flex flex-col gap-3">
+                            {plan.features.map((feature, i) => (
+                                <li key={i} className="flex items-center gap-2 text-base">
+                                    <CheckIcon className={`w-5 h-5 ${plan.highlight ? 'text-white' : 'text-green-500'}`} />
+                                    <span>{feature}</span>
+                                </li>
+                            ))}
                         </ul>
-                        <Button className='mt-auto w-full' variant={'outline'}>
-                            <Link to={"/download"}>Get started</Link>
-                        </Button>
+                        <Link to={"/download"} className="mt-auto">
+                            <button
+                                className={`w-full py-3 rounded-lg font-semibold text-lg transition ${plan.highlight ? 'bg-white text-[#a259ff] hover:bg-gray-100' : 'bg-[#181c2a] text-white hover:bg-[#23263a]'}`}
+                            >
+                                {plan.button}
+                            </button>
+                        </Link>
                     </div>
-                    <div className='gradient-border relative w-full max-w-sm flex-grow basis-0 rounded-md bg-gradient-to-b from-primary/10 via-transparent to-transparent p-8 before:bg-gradient-to-b before:from-primary before:to-primary/10 lg:max-w-none'>
-                        <div className='flex flex-col gap-3 text-left'>
-                            <p>Cloud Free</p>
-                            <div className='flex items-start gap-2'>
-                                <span className='text-2xl text-muted-foreground'>
-                                    $
-                                </span>
-                                <span className='flex items-center gap-2 bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-5xl font-medium text-transparent'>
-                                    0.00
-                                </span>
-                            </div>
-                            <p className='text-muted-foreground'>
-                                Perfect for simplicity and ease of use
-                            </p>
-                        </div>
-                        <ul className='mt-8 flex flex-col gap-4 text-left'>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='mt-0.5 h-5 w-5 shrink-0 text-primary' />
-                                <span>3 task lists</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='mt-0.5 h-5 w-5 shrink-0 text-primary' />
-                                <span>5 tags</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='mt-0.5 h-5 w-5 shrink-0 text-primary' />
-                                <span>2 members</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>1GB storage</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Access to all the apps</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Unlimited tasks, habits, notes...</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Email & community support</span>
-                            </li>
-                        </ul>
-                        <Button className='mt-8 w-full'>
-                            <Link to={"/download"}>Get started</Link>
-                        </Button>
-                    </div>
-                    <div className='gradient-border relative w-full max-w-sm flex-grow basis-0 rounded-md bg-gradient-to-b from-primary/10 via-transparent to-transparent p-8 before:bg-gradient-to-b before:from-primary before:to-primary/10 lg:max-w-none'>
-                        <div className='flex flex-col gap-3 text-left'>
-                            <p>Cloud</p>
-                            <div className='flex items-start gap-2'>
-                                <span className='text-2xl text-muted-foreground'>
-                                    $
-                                </span>
-                                <span className='flex items-center gap-2 bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-5xl font-medium text-transparent'>
-                                    {checked ? '39.99' : '3.99'}
-                                    {!checked && (
-                                        <Badge variant={'outline'}>
-                                            SAVE 15%
-                                        </Badge>
-                                    )}
-                                </span>
-                            </div>
-                            <p className='text-muted-foreground'>
-                                Perfect for simplicity and ease of use
-                            </p>
-                        </div>
-                        <ul className='mt-8 flex flex-col gap-4 text-left'>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='mt-0.5 h-5 w-5 shrink-0 text-primary' />
-                                <span>Unlimited task lists</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='mt-0.5 h-5 w-5 shrink-0 text-primary' />
-                                <span>Unlimited tags</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='mt-0.5 h-5 w-5 shrink-0 text-primary' />
-                                <span>Unlimited members</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Unlimited storage</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Access to all the apps</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Unlimited tasks, habits, notes...</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Email & community support</span>
-                            </li>
-                        </ul>
-                        <Button className='mt-8 w-full'>
-                            <Link to={"/download"}>Get started</Link>
-                        </Button>
-                    </div>
-                    {/* <div className='gradient-border relative max-w-sm flex-grow basis-0 rounded-md bg-gradient-to-br from-primary/10 via-transparent to-transparent p-8 before:bg-gradient-to-br before:from-primary/30 before:to-primary/5 lg:max-w-none'>
-                        <div className='flex flex-col gap-3 text-left'>
-                            <p>Premium</p>
-                            <div className='flex items-start gap-2'>
-                                <span className='text-2xl text-muted-foreground'>
-                                    $
-                                </span>
-                                <span className='flex items-center gap-2 bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-5xl font-medium text-transparent'>
-                                    {checked ? '699' : '69'}
-                                    {checked && (
-                                        <Badge variant={'outline'}>
-                                            SAVE 15%
-                                        </Badge>
-                                    )}
-                                </span>
-                            </div>
-                            <p className='text-muted-foreground'>
-                                Comprehensive solutions for enterprises
-                            </p>
-                        </div>
-                        <ul className='mt-8 flex flex-col gap-4 text-left'>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Unlimited team members</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>1TB of cloud storage</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Customizable options</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Dedicated account manager</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>24/7 priority support</span>
-                            </li>
-                            <li className='flex gap-2'>
-                                <CheckIcon className='5 mt-0.5 shrink-0 text-primary' />
-                                <span>Advanced security features</span>
-                            </li>
-                        </ul>
-                        <Button className='mt-8 w-full' variant={'outline'}>
-                            Contact us
-                        </Button>
-                    </div> */}
-                </div>
+                ))}
             </div>
         </section>
     )
 }
-
-export default Pricing

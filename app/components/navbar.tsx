@@ -16,7 +16,7 @@ import { Button } from "~/components/ui/button";
 const Navbar = () => {
     const [theme, setTheme] = useTheme()
     return (
-        <div className='px-5 py-2'>
+        <div className="px-5 py-2">
             <nav className='mx-auto flex max-w-7xl items-center justify-between'>
                 <Link to='/' className='flex items-center gap-2'>
                     <img src={appIcon} alt='' width={40} height={38} />
@@ -57,7 +57,6 @@ const Navbar = () => {
                     >
                         <GithubIcon className='h-5 w-5' />
                     </a>
-
                 </div>
             </nav>
         </div>

@@ -9,6 +9,8 @@ import Hero from '~/components/hero'
 import Navbar from '~/components/navbar'
 import Pricing from '~/components/pricing'
 import TaskPreview from '../components/task_preview'
+import EndToEndEncryption from '~/components/end_to_end_encryption'
+import TaskNotes from '~/components/task_notes'
 
 export const meta: MetaFunction = () => {
     return [
@@ -124,13 +126,21 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
     return (
-        <div className='dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-35%,hsla(var(--primary)_/_30%),#ffffff00)]'>
+        <div className='bg-gradient-to-b from-[#f8fafd] to-white min-h-screen'>
             <Navbar />
             <Hero />
-            <TaskPreview />
-            <Features />
-            <Pricing />
-            {/* <Banner /> */}
+            <section className="py-20">
+                <TaskNotes />
+            </section>
+            <section className="py-20 bg-gradient-to-b from-[#181c2a] to-[#23263a] text-white">
+                <EndToEndEncryption />
+            </section>
+            <section className="">
+                <Features />
+            </section>
+            <section className="">
+                <Pricing />
+            </section>
             <FAQs />
             <Contact />
             <Footer />
