@@ -41,7 +41,7 @@ const FAQs = () => {
     return (
         <section className='relative mx-auto px-5 pb-8'>
             {/* Dot pattern as background layer */}
-            <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
+            <div className="absolute inset-0 w-full h-full z-0">
                 <DotPattern
                     width={20}
                     height={20}
@@ -49,7 +49,8 @@ const FAQs = () => {
                     cy={1}
                     cr={1}
                     className={cn(
-                        'fill-primary/40 [mask-image:linear-gradient(to_bottom,transparent,white,white,transparent,transparent)]'
+                        // Fade in at top 25%, solid in middle, fade out at bottom 25%
+                        'fill-primary/40 [mask-image:linear-gradient(to_bottom,transparent_0%,white_25%,white_75%,transparent_100%)]'
                     )}
                 />
             </div>
