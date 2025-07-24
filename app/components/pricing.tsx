@@ -84,7 +84,7 @@ export default function Pricing() {
                     <span className={`font-medium ${annual ? 'text-[#a259ff]' : 'text-[#888]'}`}>Annually</span>
                 </div>
             </div>
-            <div className="flex flex-col md:flex-row gap-8 justify-center items-stretch w-full max-w-5xl mx-auto">
+            <div className="flex flex-col md:flex-row gap-8 justify-center items-center md:items-stretch w-full max-w-5xl mx-auto">
                 {[...plans, paidPlan].map((plan, idx) => (
                     <div
                         key={plan.name}
