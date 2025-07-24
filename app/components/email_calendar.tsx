@@ -21,7 +21,7 @@ export default function EmailCalendar() {
             <div className="flex-1 flex justify-center">
                 <div className="rounded-2xl shadow-lg bg-white border border-[#e5e7eb] p-0 w-full max-w-2xl flex flex-col md:flex-row overflow-hidden">
                     {/* Sidebar */}
-                    <div className="w-1/3 min-w-[180px] bg-[#f7f8fa] border-r border-[#e5e7eb] flex flex-col p-4 gap-4">
+                    <div className="w-full md:w-1/3 min-w-[180px] bg-[#f7f8fa] border-r border-[#e5e7eb] flex flex-col p-4 gap-4">
                         <div className="flex items-center gap-2 mb-2">
                             <span className="w-8 h-8 flex items-center justify-center rounded-lg bg-[#e0eaff] text-[#7b61ff] font-bold text-lg">B</span>
                             <span className="w-8 h-8 flex items-center justify-center rounded-lg bg-[#f3f4f6] text-[#23263a] font-bold text-lg">A</span>
