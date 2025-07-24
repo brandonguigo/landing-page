@@ -39,12 +39,23 @@ const faqs = [
 
 const FAQs = () => {
     return (
-        <section className='relative mx-auto px-5 pb-8 pt-48'>
-            <div className='mx-auto flex max-w-7xl flex-col gap-6 text-center'>
+        <section className='relative mx-auto px-5 pb-8'>
+            {/* Dot pattern as background layer */}
+            <div className="absolute inset-0 w-full h-full z-0">
+                <DotPattern
+                    width={20}
+                    height={20}
+                    cx={1}
+                    cy={1}
+                    cr={1}
+                    className={cn(
+                        // Fade in at top 25%, solid in middle, fade out at bottom 25%
+                        'fill-primary/40 [mask-image:linear-gradient(to_bottom,transparent_0%,white_25%,white_75%,transparent_100%)]'
+                    )}
+                />
+            </div>
+            <div className='relative z-10 mx-auto flex max-w-7xl flex-col gap-6 text-center'>
                 <div>
-                    <span className='rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-sm font-medium text-primary dark:bg-primary/25'>
-                        <span className='brightness-[1.7]'>FAQs</span>
-                    </span>
                     <h1 className='mt-4 scroll-m-20 font-inter text-4xl font-extrabold tracking-tight lg:text-5xl'>
                         <span className='bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent'>
                             Frequently{' '}
@@ -60,7 +71,7 @@ const FAQs = () => {
                 <p className='text-lg text-muted-foreground'>
                     Haven’t found what you’re looking for?{' '}
                     <a
-                        href='#name'
+                        href='#contact'
                         className={cn(
                             buttonVariants({ variant: 'link' }),
                             'px-0 text-lg text-foreground'
@@ -69,30 +80,22 @@ const FAQs = () => {
                         Contact us.
                     </a>
                 </p>
-                <div className='mt-20 flex items-center justify-between'>
-                    <DotPattern
-                        width={20}
-                        height={20}
-                        cx={1}
-                        cy={1}
-                        cr={1}
-                        className={cn(
-                            'fill-primary/40 [mask-image:linear-gradient(to_bottom,transparent,white,white,transparent,transparent)]'
-                        )}
-                    />
+                <div className='mt-20 flex flex-col items-center justify-center'>
                     <Accordion
                         collapsible
                         type='single'
                         className='mx-auto w-full max-w-4xl grow basis-28 text-left'
                     >
                         {faqs.map((faq, index) => (
-                            <AccordionItem key={index} value={`item-${index}`}>
-                                <AccordionTrigger className='text-left text-xl hover:no-underline'>
-                                    {faq.question}
-                                </AccordionTrigger>
-                                <AccordionContent className='text-base text-muted-foreground'>
-                                    {faq.answer}
-                                </AccordionContent>
+                            <AccordionItem value={`item-${index}`} className="group rounded-2xl mb-6 border-none bg-transparent p-0">
+                                <div className={`bg-white rounded-2xl shadow-lg border border-[#e5e7eb] group-data-[state=open]:border-blue-500 group-data-[state=open]:ring-2 group-data-[state=open]:ring-blue-200 transition-all`}>
+                                    <AccordionTrigger className='text-left text-xl hover:no-underline px-6 py-4 bg-transparent rounded-2xl'>
+                                        {faq.question}
+                                    </AccordionTrigger>
+                                    <AccordionContent className='text-base text-muted-foreground px-6 pb-4'>
+                                        {faq.answer}
+                                    </AccordionContent>
+                                </div>
                             </AccordionItem>
                         ))}
                     </Accordion>

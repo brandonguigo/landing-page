@@ -1,295 +1,74 @@
-import { useForm } from '@formspree/react'
-import { motion } from 'framer-motion'
-import { AppleIcon, Image, Loader2Icon, MoveRightIcon } from 'lucide-react'
-import { cn } from '~/lib/utils'
 import { Button } from './ui/button'
-import { Input } from './ui/input'
-import { Label } from './ui/label'
-import useTheme from '~/hooks/use-theme'
-import Leaf from './icons/leaf'
-import Flower from './icons/flower'
-import Swirl from './icons/swirl'
-import Fire from './icons/fire'
-import Lightning from './icons/lightning'
-import Anchor from './icons/anchor'
 import { Link } from "@remix-run/react";
 
+const downloads = [
+    {
+        app: 'Atomic Notes',
+        img: '/atomic_notes.png',
+        description: 'Atomic Notes is a note-taking app like Apple Notes. It is designed to be simple, fast, and easy to use.',
+        links: [
+            { label: 'iOS', icon: '/apple.png', url: 'https://apps.apple.com/us/app/atomic-notes/id6747767868' },
+            { label: 'Android', icon: '/android.png', url: 'https://play.google.com/store/apps/details?id=fr.atomicblend.notes' },
+            { label: 'MacOS', icon: '/apple.png', url: 'https://atomic-blend-release.s3.us-east-005.backblazeb2.com/notes/mac/AtomicNotes-latest.dmg' },
+            { label: 'Linux', icon: '/linux.png', url: 'https://atomic-blend-release.s3.us-east-005.backblazeb2.com/notes/debian/atomic-notes_latest_amd64.deb' },
+            { label: 'Windows', icon: '/windows.png', url: 'https://atomic-blend-release.s3.us-east-005.backblazeb2.com/notes/windows/AtomicNotesInstaller-latest.exe' },
+        ],
+    },
+    {
+        app: 'Atomic Task',
+        img: '/atomic_task.png',
+        description: 'Atomic Task is a task management app that helps you stay organized and focused. It is designed to be simple, fast, and easy to use.',
+        links: [
+            { label: 'iOS', icon: '/apple.png', url: 'https://apps.apple.com/us/app/atomic-task/id6743615832' },
+            { label: 'Android', icon: '/android.png', url: 'https://play.google.com/store/apps/details?id=fr.atomicblend.app' },
+            { label: 'MacOS', icon: '/apple.png', url: 'https://atomic-blend-release.s3.us-east-005.backblazeb2.com/task/mac/AtomicTask-latest.dmg' },
+            { label: 'Linux', icon: '/linux.png', url: 'https://atomic-blend-release.s3.us-east-005.backblazeb2.com/task/debian/atomic-task_latest_amd64.deb' },
+            { label: 'Windows', icon: '/windows.png', url: 'https://atomic-blend-release.s3.us-east-005.backblazeb2.com/task/windows/AtomicTaskInstaller-latest.exe' },
+        ],
+    },
+]
+
 const DownloadHero = () => {
-    const [state, handleSubmit] = useForm('mjvqrzpz')
-    const [theme] = useTheme()
-
     return (
-        <main className='mx-auto my-10 flex min-h-[calc(90vh-73px)] max-w-3xl flex-col justify-center gap-6 px-5 text-center lg:my-0'>
-            <motion.h1
-                initial={{ opacity: 0, y: -10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-                className={cn(
-                    'scroll-m-20 font-inter text-4xl font-extrabold tracking-tight lg:text-5xl'
-                )}
-            >
-                <span className='bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent'>
-                    Get Started with
-                </span>{' '}<br />
-                <span
-                    className={cn(
-                        'relative bg-gradient-to-r from-primary bg-clip-text text-5xl font-extrabold text-transparent lg:text-8xl',
-                        theme === 'orange' && 'to-rose-600',
-                        theme === 'blue' && 'to-blue-600',
-                        theme === 'green' && 'to-emerald-600',
-                        theme === 'red' && 'to-rose-600',
-                        theme === 'yellow' && 'to-yellow-600',
-                        theme === 'violet' && 'to-violet-600',
-                        theme === 'gray' && 'to-gray-600',
-                        theme === 'neutral' && 'to-neutral-600',
-                        theme === 'slate' && 'to-slate-600',
-                        theme === 'stone' && 'to-stone-600',
-                        theme === 'zinc' && 'to-zinc-600',
-                        theme === 'rose' && 'to-pink-600'
-                    )}
-                >
-                    Atomic Blend
-                </span>
-                <br />
-
-            </motion.h1>
-
-            <motion.p
-                initial={{ opacity: 0, y: -10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
-                className='text-base text-muted-foreground lg:text-lg'
-            >
-                Atomic Blend is a suite of open-source apps that help you take control of your data, streamline your tools, and build a future rooted in privacy and freedom.
-            </motion.p>
-            {
-                theme !== 'rose' &&
-                theme !== 'green' &&
-                theme !== 'orange' &&
-                theme !== 'blue' &&
-                theme !== 'yellow' && (
-                    <motion.span
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{
-                            duration: 0.5,
-                            ease: 'easeOut',
-                            delay: 0.6,
-                        }}
-                        className='mx-auto h-52 w-[1px] rounded-full  bg-gradient-to-b from-transparent to-primary'
-                    ></motion.span>
-                )
-            }
-            {
-                theme === 'rose' && (
-                    <motion.span
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
-                        className='mx-auto'
-                    >
-                        <Flower
-                            className='h-56 rotate-180'
-                            linearFrom='text-primary'
-                            linearTo='text-primary/10'
-                        />
-                    </motion.span>
-                )
-            }
-            {
-                theme === 'green' && (
-                    <motion.span
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
-                        className='mx-auto'
-                    >
-                        <Swirl
-                            className='h-56'
-                            linearFrom='text-primary/10'
-                            linearTo='text-primary'
-                        />
-                    </motion.span>
-                )
-            }
-            {
-                theme === 'orange' && (
-                    <motion.span
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
-                        className='mx-auto'
-                    >
-                        <Fire
-                            className='h-56'
-                            linearFrom='text-primary/10'
-                            linearTo='text-primary'
-                        />
-                    </motion.span>
-                )
-            }
-            {
-                theme === 'yellow' && (
-                    <motion.span
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
-                        className='mx-auto'
-                    >
-                        <Lightning
-                            className='h-56'
-                            linearFrom='text-primary/10'
-                            linearTo='text-primary'
-                        />
-                    </motion.span>
-                )
-            }
-            {
-                theme === 'blue' && (
-                    <motion.span
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
-                        className='mx-auto'
-                    >
-                        <Lightning
-                            className='h-56'
-                            linearFrom='text-primary/10'
-                            linearTo='text-primary'
-                        />
-                    </motion.span>
-                )
-            }
-            <motion.div className={"flex flex-col"}>
-                <div className={"flex flex-row items-center justify-center mb-4"}>
-                    <img
-                        src="/atomic_task.png"
-                        alt="Atomic Task Logo"
-                        className="h-12 w-12 mr-3 rounded-lg"
-                    />
-                    <p className={"scroll-m-20 font-inter text-2xl font-extrabold tracking-tight lg:text-3xl"}>Atomic Task</p>
+        <section className="py-20 bg-gradient-to-b from-white via-[#f4f7fe] to-[#eaf1ff] text-[#181c2a]">
+            <div className='max-w-7xl mx-auto px-4'>
+                <div className='mx-auto flex max-w-2xl flex-col gap-6 text-center mb-12'>
+                    <h1 className='mt-4 font-inter text-4xl md:text-5xl font-extrabold tracking-tight mb-2'>
+                        <span className='bg-gradient-to-b from-[#222] to-[#444] bg-clip-text text-transparent'>
+                            Download the Apps
+                        </span>
+                    </h1>
+                    <p className='text-lg text-[#444] mb-8'>
+                        Get Atomic Notes and Atomic Task for all your devices. Choose your platform and start using Atomic Blend today!
+                    </p>
                 </div>
-                <p className={"text-base text-muted-foreground lg:text-lg"}>Atomic Task is a task management app that helps you stay organized and focused. It is designed to be simple, fast, and easy to use.</p>
-                <div className={"flex flex-col mt-4"}>
-                    <div className={"flex flex-col md:flex-row"}>
-                        <Button className='mt-auto mr-2 w-full' >
-                            <img
-                                src="/apple.png"
-                                alt="Apple Logo"
-                                className="h-5 w-5 mr-3"
-                            />
-                            <Link to={"https://apps.apple.com/us/app/atomic-task/id6743615832"} target={"_blank"}>Download for iOS</Link>
-                        </Button>
-                        <Button className='mt-auto mr-2 w-full'>
-                            <img
-                                src="/android.png"
-                                alt="Android Logo"
-                                className="h-5 w-5 mr-3"
-                            />
-                            <Link to={"https://play.google.com/store/apps/details?id=fr.atomicblend.app"} target={"_blank"}>Download for Android</Link>
-                            {/* <p className={"ml-3 outline px-1 rounded outline-gray-200 text-gray-beta"}>beta</p> */}
-                        </Button>
-                    </div>
-                    <div className={"flex flex-col md:flex-row mt-2"}>
-                        <Button className='mt-auto w-full mr-2'>
-                            <img
-                                src="/apple.png"
-                                alt="Apple Logo"
-                                className="h-5 w-5 mr-3"
-                            />
-                            <Link to={"https://atomic-blend-release.s3.us-east-005.backblazeb2.com/task/mac/AtomicTask-latest.dmg"} target={"_blank"}>Download for MacOS</Link>
-                        </Button>
-                        <Button className='mt-auto w-full mr-2'>
-                            <img
-                                src="/linux.png"
-                                alt="Linux Logo"
-                                className="h-6 w-6 mr-3 rounded-lg"
-                            />
-                            <Link to={"https://atomic-blend-release.s3.us-east-005.backblazeb2.com/task/debian/atomic-task_latest_amd64.deb"} target={"_blank"}>Download for Linux</Link>
-                        </Button>
-                    </div>
-                    <div className={"flex flex-col md:flex-row mt-2"}>
-                        <Button className='mt-auto w-full mr-2'>
-                            <img
-                                src="/windows.png"
-                                alt="Windows Logo"
-                                className="h-5 w-5 mr-3"
-                            />
-                            <Link to={"https://atomic-blend-release.s3.us-east-005.backblazeb2.com/task/windows/AtomicTaskInstaller-latest.exe"} target={"_blank"}>Download for Windows</Link>
-                        </Button>
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    {downloads.map((app, idx) => (
+                        <div key={app.app} className="rounded-2xl bg-white border border-[#e5e7eb] shadow-lg p-8 h-full flex flex-col items-center gap-3">
+                            <div className="flex flex-row items-center justify-center mb-4">
+                                <img src={app.img} alt={app.app + ' Logo'} className="h-12 w-12 mr-3 rounded-lg" />
+                                <p className="font-inter text-2xl font-extrabold tracking-tight lg:text-3xl">{app.app}</p>
+                            </div>
+                            <p className="text-base text-muted-foreground lg:text-lg mb-4 text-center">{app.description}</p>
+                            <div className="grid grid-cols-2 grid-rows-3 gap-3 w-full max-w-xs mx-auto">
+                                {app.links.map((link, i) => (
+                                    <a
+                                        key={link.label}
+                                        href={link.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 w-full px-4 py-2 rounded-lg font-semibold text-base bg-gradient-to-r from-[#7b61ff] to-[#3b82f6] text-white shadow hover:from-[#6c47ff] hover:to-[#2563eb] transition"
+                                    >
+                                        <img src={link.icon} alt={link.label + ' Logo'} className={link.label === 'Linux' ? 'h-6 w-6 rounded-lg' : 'h-5 w-5'} />
+                                        {link.label}
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            </motion.div>
-
-            <motion.div className={"flex flex-col mt-16"}>
-                <div className={"flex flex-row items-center justify-center mb-4"}>
-                    <img
-                        src="/atomic_notes.png"
-                        alt="Atomic Notes Logo"
-                        className="h-12 w-12 mr-3 rounded-lg"
-                    />
-                    <p className={"scroll-m-20 font-inter text-2xl font-extrabold tracking-tight lg:text-3xl"}>Atomic Notes</p>
-                </div>
-                <p className={"text-base text-muted-foreground lg:text-lg"}>Atomic Notes is a note-taking app like Apple Notes. It is designed to be simple, fast, and easy to use.</p>
-                <div className={"flex flex-col mt-4"}>
-                    <div className={"flex flex-col md:flex-row"}>
-                        <Button className='mt-auto mr-2 w-full' >
-                            <img
-                                src="/apple.png"
-                                alt="Apple Logo"
-                                className="h-5 w-5 mr-3"
-                            />
-                            <Link to={"https://apps.apple.com/us/app/atomic-notes/id6747767868"} target={"_blank"}>Download for iOS</Link>
-                        </Button>
-                        <Button className='mt-auto mr-2 w-full'>
-                            <img
-                                src="/android.png"
-                                alt="Android Logo"
-                                className="h-5 w-5 mr-3"
-                            />
-                            <Link to={"https://play.google.com/store/apps/details?id=fr.atomicblend.notes"} target={"_blank"}>Download for Android</Link>
-                            {/* <p className={"ml-3 outline px-1 rounded outline-gray-200 text-gray-beta"}>beta</p> */}
-                        </Button>
-                    </div>
-                    <div className={"flex flex-col md:flex-row mt-2"}>
-                        <Button className='mt-auto w-full mr-2'>
-                            <img
-                                src="/apple.png"
-                                alt="Apple Logo"
-                                className="h-5 w-5 mr-3"
-                            />
-                            <Link to={"https://atomic-blend-release.s3.us-east-005.backblazeb2.com/notes/mac/AtomicNotes-latest.dmg"} target={"_blank"}>Download for MacOS</Link>
-                        </Button>
-                        <Button className='mt-auto w-full mr-2'>
-                            <img
-                                src="/linux.png"
-                                alt="Linux Logo"
-                                className="h-6 w-6 mr-3 rounded-lg"
-                            />
-                            <Link to={"https://atomic-blend-release.s3.us-east-005.backblazeb2.com/notes/debian/atomic-notes_latest_amd64.deb"} target={"_blank"}>Download for Linux</Link>
-                        </Button>
-                    </div>
-                    <div className={"flex flex-col md:flex-row mt-2"}>
-                        <Button className='mt-auto w-full mr-2'>
-                            <img
-                                src="/windows.png"
-                                alt="Windows Logo"
-                                className="h-5 w-5 mr-3"
-                            />
-                            <Link to={"https://atomic-blend-release.s3.us-east-005.backblazeb2.com/notes/windows/AtomicNotesInstaller-latest.exe"} target={"_blank"}>Download for Windows</Link>
-                        </Button>
-                    </div>
-                </div>
-            </motion.div>
-        </main >
+            </div>
+        </section>
     )
 }
 

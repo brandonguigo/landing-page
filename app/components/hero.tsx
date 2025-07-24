@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from '@formspree/react'
 import { motion } from 'framer-motion'
-import { Loader2Icon, MoveRightIcon } from 'lucide-react'
+import { ArrowRight, Github } from 'lucide-react'
 import { cn } from '~/lib/utils'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
@@ -69,203 +69,36 @@ const backgroundIcons = [
 ]
 
 const Hero = () => {
-    const [state, handleSubmit] = useForm('mjvqrzpz')
-    const [theme] = useTheme()
-    const [isMobile, setIsMobile] = React.useState(false)
-
-    React.useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768)
-        }
-
-        checkMobile()
-        window.addEventListener('resize', checkMobile)
-        return () => window.removeEventListener('resize', checkMobile)
-    }, [])
-
     return (
-        <main className='relative w-full min-h-screen flex flex-col justify-center gap-6 px-5 text-center'>
-            {/* Scattered Background Icons */}
-            {backgroundIcons
-                .filter(iconConfig => !isMobile || iconConfig.mobile)
-                .map((iconConfig, index) => (
-                    <motion.img
-                        key={index}
-                        src={iconConfig.icon}
-                        alt=""
-                        className={cn(
-                            'absolute opacity-10 pointer-events-none select-none z-0',
-                            iconConfig.size
-                        )}
-                        style={{
-                            left: iconConfig.x,
-                            top: iconConfig.y,
-                            transform: `rotate(${iconConfig.rotation})`,
-                            filter: 'brightness(0) saturate(100%) invert(50%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(80%) contrast(90%)'
-                        }}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 0.1, scale: 1 }}
-                        transition={{
-                            duration: 0.8,
-                            delay: iconConfig.delay,
-                            ease: 'easeOut'
-                        }}
-                    />
-                ))}
-
-            <div className="max-w-3xl flex flex-col justify-center items-center mx-auto gap-4 relative z-10 md:mt-24">
-                <motion.h1
-                    initial={{ opacity: 0, y: -10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, ease: 'easeOut' }}
-                    className={cn(
-                        'scroll-m-20 font-inter text-4xl font-extrabold tracking-tight lg:text-5xl'
-                    )}
-                >
-                    <span className='bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent'>
-                        Tools you know. <br />
-                    </span>{' '}
-                    <span
-                        className={cn(
-                            'relative bg-gradient-to-r from-primary bg-clip-text text-5xl font-extrabold text-transparent lg:text-6xl underline decoration-8 decoration-primary/50',
-                            theme === 'orange' && 'to-rose-600',
-                            theme === 'blue' && 'to-blue-600',
-                            theme === 'green' && 'to-emerald-600',
-                            theme === 'red' && 'to-rose-600',
-                            theme === 'yellow' && 'to-yellow-600',
-                            theme === 'violet' && 'to-violet-600',
-                            theme === 'gray' && 'to-gray-600',
-                            theme === 'neutral' && 'to-neutral-600',
-                            theme === 'slate' && 'to-slate-600',
-                            theme === 'stone' && 'to-stone-600',
-                            theme === 'zinc' && 'to-zinc-600',
-                            theme === 'rose' && 'to-pink-600'
-                        )}
-                    >
-                        Privacy you never had.
-                    </span>
-                    <br />
-                    {/* <span className='bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent'>
-                    App Suite{' '}
-                </span> */}
-                </motion.h1>
-                <motion.p
-                    initial={{ opacity: 0, y: -10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
-                    className='text-base text-muted-foreground lg:text-lg'
-                >
-
-                    A complete, beautifully integrated suite for your tasks, notes, emails, calendars, and files — designed for simplicity and privacy from day one.
-                </motion.p>
+        <section
+            className="w-full min-h-[60vh] flex flex-col justify-center items-center py-28 px-4 text-center"
+            style={{
+                background: 'linear-gradient(180deg, #f4f7fe 0%, #eaf1ff 100%)',
+            }}
+        >
+            <h1 className="font-inter text-5xl md:text-7xl font-extrabold tracking-tight mb-2 text-black">
+                Tools you know.
+            </h1>
+            <h2 className="font-inter text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-[#a259ff] via-[#7b61ff] to-[#3b82f6] text-transparent bg-clip-text">
+                Privacy you never had.
+            </h2>
+            <p className="max-w-2xl mx-auto text-xl md:text-2xl text-[#444] mb-10 font-medium">
+                A complete, beautifully integrated suite for your tasks, notes, emails, calendars, and files<br />
+                — designed for simplicity and privacy from day one.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/download" className="inline-block">
+                    <button className="flex items-center gap-2 px-8 py-3 rounded-lg bg-gradient-to-r from-[#7b61ff] to-[#3b82f6] hover:from-[#6c47ff] hover:to-[#2563eb] text-white font-semibold text-lg shadow transition">
+                        Get Started <ArrowRight className="w-5 h-5" />
+                    </button>
+                </a>
+                <a href="https://github.com/brandonguigo/atomic-blend" target="_blank" rel="noopener noreferrer" className="inline-block">
+                    <button className="flex items-center gap-2 px-8 py-3 rounded-lg border border-[#d1d5db] bg-white text-[#222] hover:bg-[#f3f4f6] font-semibold text-lg transition shadow-sm">
+                        <Github className="w-5 h-5" /> View on GitHub
+                    </button>
+                </a>
             </div>
-            {
-                theme !== 'rose' &&
-                theme !== 'green' &&
-                theme !== 'orange' &&
-                theme !== 'blue' &&
-                theme !== 'yellow' && (
-                    <motion.span
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{
-                            duration: 0.5,
-                            ease: 'easeOut',
-                            delay: 0.6,
-                        }}
-                        className='mx-auto h-52 w-[1px] rounded-full  bg-gradient-to-b from-transparent to-primary'
-                    ></motion.span>
-                )
-            }
-            {
-                theme === 'rose' && (
-                    <motion.span
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
-                        className='mx-auto'
-                    >
-                        <Flower
-                            className='h-56 rotate-180'
-                            linearFrom='text-primary'
-                            linearTo='text-primary/10'
-                        />
-                    </motion.span>
-                )
-            }
-            {
-                theme === 'green' && (
-                    <motion.span
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
-                        className='mx-auto'
-                    >
-                        <Swirl
-                            className='h-56'
-                            linearFrom='text-primary/10'
-                            linearTo='text-primary'
-                        />
-                    </motion.span>
-                )
-            }
-            {
-                theme === 'orange' && (
-                    <motion.span
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
-                        className='mx-auto'
-                    >
-                        <Fire
-                            className='h-56'
-                            linearFrom='text-primary/10'
-                            linearTo='text-primary'
-                        />
-                    </motion.span>
-                )
-            }
-            {
-                theme === 'yellow' && (
-                    <motion.span
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
-                        className='mx-auto'
-                    >
-                        <Lightning
-                            className='h-56'
-                            linearFrom='text-primary/10'
-                            linearTo='text-primary'
-                        />
-                    </motion.span>
-                )
-            }
-            {
-                theme === 'blue' && (
-                    <motion.span
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
-                        className='mx-auto'
-                    >
-                        <Lightning
-                            className='h-56'
-                            linearFrom='text-primary/10'
-                            linearTo='text-primary'
-                        />
-                    </motion.span>
-                )
-            }
-        </main >
+        </section>
     )
 }
 
