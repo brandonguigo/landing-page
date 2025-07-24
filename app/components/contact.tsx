@@ -1,15 +1,26 @@
-import { LinkedinIcon, Loader2Icon, TwitterIcon } from 'lucide-react'
+import { TwitterIcon, GithubIcon, GlobeIcon, Loader2Icon } from 'lucide-react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Label } from './ui/label'
 import { Textarea } from './ui/textarea'
-import Discord from './icons/discord'
 import { useForm } from '@formspree/react'
+
+const socials = [
+    {
+        icon: <TwitterIcon className="w-7 h-7 text-white" />, label: 'Twitter', value: '@Brandon_Guigo', href: 'https://twitter.com/Brandon_Guigo',
+    },
+    {
+        icon: <GithubIcon className="w-7 h-7 text-white" />, label: 'GitHub', value: 'brandon-guigo', href: 'https://github.com/brandon-guigo',
+    },
+    {
+        icon: <GlobeIcon className="w-7 h-7 text-white" />, label: 'Website', value: 'brandonguigo', href: 'https://brandonguigo.com',
+    },
+]
 
 const Contact = () => {
     const [state, handleSubmit] = useForm('xpzgladz')
     return (
-        <section className='mx-auto mt-48 flex max-w-7xl flex-col items-center gap-20 px-5 lg:flex-row'>
+        <section className='mx-auto mt-8 flex max-w-7xl flex-col items-center gap-20 px-5 lg:flex-row'>
             <div className='mx-auto flex max-w-2xl flex-grow basis-0 flex-col gap-6'>
                 <div>
                     <h1 className='mt-4 scroll-m-20 text-center font-inter text-4xl font-extrabold tracking-tight lg:text-left lg:text-5xl'>
@@ -35,31 +46,25 @@ const Contact = () => {
                         ears!
                     </span>
                 </p>
-                <div className='flex justify-center lg:justify-start'>
-                    <div className='flex flex-col gap-4 lg:items-start'>
+                {/* Socials Section */}
+                <div className="flex flex-col gap-6 mt-8">
+                    {socials.map((s, i) => (
                         <a
-                            href='https://twitter.com/Brandon_Guigo'
-                            className='inline-flex gap-2'
-                            target='_blank'
-                            rel='noopener noreferrer'
+                            key={s.label}
+                            href={s.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4 group"
                         >
-                            <TwitterIcon className='h-6 w-6 text-primary' />{' '}
-                            @Brandon_Guigo
+                            <span className="w-12 h-12 flex items-center justify-center rounded-xl bg-[#a259ff] group-hover:bg-[#7b61ff] transition">
+                                {s.icon}
+                            </span>
+                            <div className="flex flex-col">
+                                <span className="font-bold text-lg text-[#181c2a]">{s.label}</span>
+                                <span className="text-[#a259ff] text-lg font-medium">{s.value}</span>
+                            </div>
                         </a>
-                        <a
-                            href='https://www.linkedin.com/in/brandonguigo/'
-                            className='flex items-center gap-2'
-                            target='_blank'
-                            rel='noopener noreferrer'
-                        >
-                            <LinkedinIcon className='h-6 w-6 text-primary' />{' '}
-                            <span>brandon-guigo</span>
-                        </a>
-                        <span className='flex items-center gap-2'>
-                            <Discord className='h-6 w-6 fill-primary' />{' '}
-                            <span>brandonguigo</span>
-                        </span>
-                    </div>
+                    ))}
                 </div>
             </div>
             <form
