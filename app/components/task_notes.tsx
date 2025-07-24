@@ -2,7 +2,7 @@ import { Check } from 'lucide-react'
 
 export default function TaskNotes() {
     return (
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 px-4">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:flex-row-reverse items-center gap-12 px-4">
             {/* Left: Text */}
             <div className="flex-1 min-w-[280px]">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Task & Notes</h2>
