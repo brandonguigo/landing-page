@@ -71,7 +71,7 @@ const FAQs = () => {
                 <p className='text-lg text-muted-foreground'>
                     Haven’t found what you’re looking for?{' '}
                     <a
-                        href='#name'
+                        href='#contact'
                         className={cn(
                             buttonVariants({ variant: 'link' }),
                             'px-0 text-lg text-foreground'
