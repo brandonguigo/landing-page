@@ -11,6 +11,7 @@ import Pricing from '~/components/pricing'
 import TaskPreview from '../components/task_preview'
 import EndToEndEncryption from '~/components/end_to_end_encryption'
 import TaskNotes from '~/components/task_notes'
+import EmailCalendar from '~/components/email_calendar'
 
 export const meta: MetaFunction = () => {
     return [
@@ -129,7 +130,10 @@ export default function Index() {
         <div className='bg-gradient-to-b from-[#f8fafd] to-white min-h-screen'>
             <Navbar />
             <Hero />
-            <section className="py-20">
+            <section className="pt-10">
+                <EmailCalendar />
+            </section>
+            <section className="pt-10 pb-20">
                 <TaskNotes />
             </section>
             <section className="py-20 bg-gradient-to-b from-[#181c2a] to-[#23263a] text-white">
