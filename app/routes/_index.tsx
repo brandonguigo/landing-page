@@ -135,14 +135,18 @@ export default function Index() {
             <section className="py-20 bg-gradient-to-b from-[#181c2a] to-[#23263a] text-white">
                 <EndToEndEncryption />
             </section>
-            <section className="">
+            <section id="features" className="">
                 <Features />
             </section>
-            <section className="">
+            <section id="pricing" className="py-20">
                 <Pricing />
             </section>
-            <FAQs />
-            <Contact />
+            <section id="faq">
+                <FAQs />
+            </section>
+            <section id="contact">
+                <Contact />
+            </section>
             <Footer />
         </div>
     )
