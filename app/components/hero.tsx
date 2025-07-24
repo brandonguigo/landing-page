@@ -87,7 +87,7 @@ const Hero = () => {
                 — designed for simplicity and privacy from day one.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#" className="inline-block">
+                <a href="/download" className="inline-block">
                     <button className="flex items-center gap-2 px-8 py-3 rounded-lg bg-gradient-to-r from-[#7b61ff] to-[#3b82f6] hover:from-[#6c47ff] hover:to-[#2563eb] text-white font-semibold text-lg shadow transition">
                         Get Started <ArrowRight className="w-5 h-5" />
                     </button>

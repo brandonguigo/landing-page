@@ -52,10 +52,16 @@ const DownloadHero = () => {
                             <p className="text-base text-muted-foreground lg:text-lg mb-4 text-center">{app.description}</p>
                             <div className="grid grid-cols-2 grid-rows-3 gap-3 w-full max-w-xs mx-auto">
                                 {app.links.map((link, i) => (
-                                    <Button key={link.label} className='flex items-center gap-2 w-full'>
+                                    <a
+                                        key={link.label}
+                                        href={link.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 w-full px-4 py-2 rounded-lg font-semibold text-base bg-gradient-to-r from-[#7b61ff] to-[#3b82f6] text-white shadow hover:from-[#6c47ff] hover:to-[#2563eb] transition"
+                                    >
                                         <img src={link.icon} alt={link.label + ' Logo'} className={link.label === 'Linux' ? 'h-6 w-6 rounded-lg' : 'h-5 w-5'} />
-                                        <Link to={link.url} target="_blank">{link.label}</Link>
-                                    </Button>
+                                        {link.label}
+                                    </a>
                                 ))}
                             </div>
                         </div>
