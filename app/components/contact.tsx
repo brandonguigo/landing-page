@@ -7,7 +7,7 @@ const socials = [
         icon: <TwitterIcon className="w-7 h-7 text-white" />, label: 'Twitter', value: '@Brandon_Guigo', href: 'https://twitter.com/Brandon_Guigo',
     },
     {
-        icon: <GithubIcon className="w-7 h-7 text-white" />, label: 'GitHub', value: 'brandon-guigo', href: 'https://github.com/brandon-guigo',
+        icon: <GithubIcon className="w-7 h-7 text-white" />, label: 'GitHub', value: 'brandonguigo', href: 'https://github.com/brandonguigo',
     },
     {
         icon: <GlobeIcon className="w-7 h-7 text-white" />, label: 'Website', value: 'brandonguigo', href: 'https://brandonguigo.com',
